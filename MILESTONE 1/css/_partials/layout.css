@@ -48,6 +48,14 @@ body{
 .col .user .text .description{
     font-size: var(--font-xs);
     color: var(--color-gray);
+    /* triple dots */
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    max-width: 11rem;
+    display: inline-block; 
+    height: 1.2em; 
+    white-space: nowrap;
+    /* /triple dots */
 }
 .col .buttons i{
     color: var(--color-gray);

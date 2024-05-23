@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="./css/style.css">
 
+
     <title>Document</title>
 </head>
 <body>
@@ -43,13 +44,13 @@
             </div>
             <div class="chats-section">
                 <!-- CHAT DEI CONTATTI -->
-                <div class="closed-chat" v-for="contact in contacts">
-                    <span class="last-time desktop-sm-up">16:15</span>
+                <div class="closed-chat" v-for="(contact, index) in contacts" v-show="contact.visible">
+                    <span class="last-time desktop-sm-up">{{ dateToTime( getDateFromString( getLastMessage(index).date ) ) }}</span>
                     <div class="user"> 
-                        <img src="./img/avatar_1.jpg" alt="Avatar1">
+                        <img :src="contact.avatar" alt="Avatar1">
                         <div class="text desktop-sm-up">
-                            <h2 class="name">Michele</h2>
-                            <span class="description">Lorem ipsum dolor sit amet.</span>
+                            <h2 class="name">{{ contact.name }}</h2>
+                            <span class="description">{{ getLastMessage(index).message }}</span>
                         </div>
                     </div>
                 </div>
@@ -57,6 +58,7 @@
             </div>
         </div>
         <!-- /COLONNA DI SINISTRA -->
+
         <!-- COLONNA DI DESTRA -->
         <div class="col chat">
             <div class="top-section">
@@ -101,8 +103,14 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- /vue.js -->
 
+    <!-- luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+    <!-- /luxon -->
+
+
+
     <!-- main.js -->
-    <script src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
     <!-- /main.js -->
 </body>
 </html>
