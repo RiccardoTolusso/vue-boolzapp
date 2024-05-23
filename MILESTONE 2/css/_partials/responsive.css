@@ -1,0 +1,42 @@
+/* from tablet up */
+@media screen and (min-width: 480px){
+    .app .tablet-up{
+        display: block;
+    }
+
+    .app .menu.tablet-up{
+        display: flex;
+    }
+
+    .col.menu{
+        flex-shrink: 0;
+    }
+
+    .col .top-section{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .chat .input-section{
+        padding: 0 1rem;
+    }
+} 
+
+/* small laptop up */
+@media screen and (min-width: 768px){
+    .app .desktop-sm-up{
+        display: block;
+    }
+
+    .app{
+        height: 90%;
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;    
+    }
+
+    .col.menu{
+        width: 320px;
+        flex-shrink: 0;
+    }   
+}

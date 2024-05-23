@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/c3f6cda4b5.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <!-- COLONNA DI SINISTRA -->
+        <div class="col menu tablet-up">
+            <!-- SEZIONE UTENTE IN ALTO -->
+            <div class="top-section">
+                <div class="user"> 
+                    <img src="./img/avatar_io.jpg" alt="Avatar1">
+                </div>
+                <div class="buttons desktop-sm-up">
+                    <i class="fa-solid fa-circle-notch"></i>
+                    <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+            <!-- SEZIONE ATTIVA LE NOTIFICHE -->
+            <div class="notify-section desktop-sm-up">
+                <i class="fa-solid fa-bell-slash"></i>
+                <span>
+                    <h2>Ricevi notifiche di nuovi messaggi</h2>
+                    <p>Attiva notifiche desktop</p>
+                </span>
+            </div>
+            <div class="search-section desktop-sm-up">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Cerca o inizia una nuova chat">
+            </div>
+            <div class="chats-section">
+                <!-- CHAT DEI CONTATTI -->
+                <div class="closed-chat" v-for="(contact, index) in contacts" v-show="contact.visible">
+                    <span class="last-time desktop-sm-up">{{ dateToTime( getDateFromString( getLastMessage(index).date ) ) }}</span>
+                    <div class="user"> 
+                        <img :src="contact.avatar" alt="Avatar1">
+                        <div class="text desktop-sm-up">
+                            <h2 class="name">{{ contact.name }}</h2>
+                            <span class="description">{{ getLastMessage(index).message }}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /CHAT DEI CONTATTI -->
+            </div>
+        </div>
+        <!-- /COLONNA DI SINISTRA -->
+
+        <!-- COLONNA DI DESTRA -->
+        <div class="col chat">
+            <div class="top-section">
+                <div class="user"> 
+                    <img src="./img/avatar_1.jpg" alt="Avatar1">
+                    <div class="text">
+                        <h2 class="name">Michele</h2>
+                        <span class="description">Ultimo accesso oggi alle 18:15</span>
+                    </div>
+                </div>
+                <div class="buttons tablet-up">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+
+            <div class="messages-section">
+                <div class="message">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, tenetur cupiditate dolorum harum ad eaque dolorem veniam at eveniet ducimus. At voluptates tempora ullam aperiam cum pariatur obcaecati quam libero.</p>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <span class="time">16:15</span>
+                </div>
+                
+                <div class="message msg-sent">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, tenetur cupiditate dolorum harum ad eaque dolorem veniam at eveniet ducimus. At voluptates tempora ullam aperiam cum pariatur obcaecati quam libero.</p>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <span class="time">16:15</span>
+                </div>
+            </div>
+            <div class="input-section">
+                <i class="fa-regular fa-face-smile"></i>
+                <input type="text" placeholder="Scrivi un messaggio">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+        </div>
+        <!-- /COLONNA DI DESTRA -->
+    </div>
+
+
+    <!-- vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- /vue.js -->
+
+    <!-- luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+    <!-- /luxon -->
+
+
+
+    <!-- main.js -->
+    <script type="module" src="./js/main.js"></script>
+    <!-- /main.js -->
+</body>
+</html>
