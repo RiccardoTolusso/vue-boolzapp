@@ -44,7 +44,7 @@
             </div>
             <div class="chats-section">
                 <!-- CHAT DEI CONTATTI -->
-                <div class="closed-chat" v-for="(contact, index) in contacts" v-show="contact.visible">
+                <div class="closed-chat" v-for="(contact, index) in contacts" v-show="contact.visible" @click="changeActive(index)">
                     <span class="last-time desktop-sm-up">{{ getTimeFromLastMessage(index) }}</span>
                     <div class="user"> 
                         <img :src="contact.avatar" alt="Avatar1">
@@ -63,7 +63,7 @@
         <div class="col chat">
             <div class="top-section">
                 <div class="user"> 
-                    <img src="./img/avatar_1.jpg" alt="Avatar1">
+                    <img :src="contacts[activeChat].avatar" alt="Avatar1">
                     <div class="text">
                         <h2 class="name">{{ contacts[activeChat].name }}</h2>
                         <span class="description">{{`Ultimo accesso oggi alle ${getTimeFromLastMessage(activeChat)}`}}</span>
@@ -78,7 +78,7 @@
 
             <div class="messages-section">
                 <div class="message" :class="{ 'msg-sent': message.status === 'sent' } " v-for="message in contacts[activeChat].messages" >
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, tenetur cupiditate dolorum harum ad eaque dolorem veniam at eveniet ducimus. At voluptates tempora ullam aperiam cum pariatur obcaecati quam libero.</p>
+                    <p>{{ message.message }}</p>
                     <i class="fa-solid fa-chevron-down"></i>
                     <span class="time">{{ dateToTime(getDateFromString(message.date)) }}</span>
                 </div>

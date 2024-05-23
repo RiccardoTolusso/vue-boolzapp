@@ -89,22 +89,28 @@ body{
     padding: 1rem 2rem 1.5rem 1rem;
     border-radius: .625rem;
     position: relative;
+    align-self: flex-start;
 }
+
+.messages-section .message p{
+    padding-right: 1rem;
+}
+
 .messages-section .message:first-child{
     margin-top: 3rem;
 }
 .messages-section .message i{
     position: absolute;
     color: var(--color-gray);
-    top: 1.5rem;
+    top: 1.2rem;
     right: 12px;
 }
 .messages-section .message .time{
     position: absolute;
     font-size: var(--font-xs);
     color: var(--color-gray);
-    bottom: .125rem;
-    right: .125rem;
+    bottom: .250rem;
+    right: .250rem;
 }
 .messages-section .message.msg-sent{
     background-color: var(--color-green);

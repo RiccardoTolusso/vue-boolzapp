@@ -29,6 +29,9 @@ createApp({
         },
         getTimeFromLastMessage(index){
             return this.dateToTime( this.getDateFromString( this.getLastMessage(index).date ) )
+        },
+        changeActive(newIndex){
+            this.activeChat = newIndex;
         }
     }
 }).mount(".app")
