@@ -14,7 +14,8 @@ createApp({
             contacts,
             activeChat: 0,
             inputTexts: [],
-            inputSearch: null
+            inputSearch: null,
+            showContext: null
         }
     },
     methods:{
@@ -33,6 +34,7 @@ createApp({
         },
         changeActive(newIndex){
             this.activeChat = newIndex;
+            this.showContext = null
         },
         addMessage(index, message, status){
             // dato l'indice corrispondente al contatto e un messaggio aggiunge il messaggio alla lista dei messaggi
@@ -65,7 +67,7 @@ createApp({
             setTimeout(()=>{
                 this.addMessage(activeChat, "ok", "received")
             }, 1_000)
-            console.log("qua")
+            this.showContext = null
         },
         filterSearch(){
             if (this.inputSearch){
@@ -75,10 +77,34 @@ createApp({
             } else {
                 return this.contacts;
             }
-        }   
-    },
-    onBeforeMount(){
-        console.log("ciaooo")
+        },
+        openContextMenu(index){
+            if (this.showContext === index){
+                this.showContext === null
+            } else {
+                this.showContext = index   
+            }
+        },
+        deleteMessage(index){
+            this.contacts = this.contacts.map((contact, i) => {
+                if (i !== this.activeChat){
+                    // se il contatto non è quello da modificare
+                    return contact
+                }
+                else {
+                    // se è il contatto da modificare genero un nuovo contatto identico
+                    const newContact = {
+                        ...contact
+                    }
+                    newContact.messages = newContact.messages.filter((_, i)=> i !== index)
+                    
+                    return newContact
+                }
+
+            })
+            this.showContext = null
+        }
+        
     }
 
 }).mount(".app")

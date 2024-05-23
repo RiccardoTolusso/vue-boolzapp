@@ -84,12 +84,15 @@ body{
   /*>> message  */
 .messages-section .message{
     max-width: 50%;
-    margin: 0.5rem 10%;
+    margin: 0.2rem 10%;
     background-color: white;
     padding: 1rem 2rem 1.5rem 1rem;
     border-radius: .625rem;
     position: relative;
     align-self: flex-start;
+}
+.messages-section .message:last-child{
+    margin-bottom: 5rem;
 }
 
 .messages-section .message p{
@@ -125,13 +128,20 @@ body{
     background-color: white ;
     position: absolute;
     top: 1.7rem;
-    right: 0.75rem;
+    right: -10rem;
     overflow: hidden;
     box-sizing: border-box;
     border-radius: .3125rem;
     box-shadow: 0px 0px 7px var(--color-dark-gray);
     z-index: 999;
+    display: none;
 }
+.msg-sent .context-menu{
+    right: 0.75rem;
+}
+.show-context .context-menu{
+    display: block;
+} 
 .context-menu div{
     width: 10rem;
     text-align: center;
@@ -140,7 +150,6 @@ body{
 .context-menu div:hover{
     font-weight: bold;
     cursor: pointer;
-    display: None;
 }
 
 

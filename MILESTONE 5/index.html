@@ -45,7 +45,7 @@
             </div>
             <div class="chats-section">
                 <!-- CHAT DEI CONTATTI -->
-                <div class="closed-chat" v-for="(contact, index) in filterSearch()" v-show="contact.visible" @click="changeActive(index)">
+                <div class="closed-chat" v-for="(contact, index) in filterSearch()" v-show="contact.visible" @click="changeActive(index)" :key="`contact-${index}`">
                     <span class="last-time desktop-sm-up">{{ getTimeFromLastMessage(index) }}</span>
                     <div class="user"> 
                         <img :src="contact.avatar" alt="Avatar1">
@@ -78,13 +78,13 @@
             </div>
 
             <div class="messages-section">
-                <div class="message" :class="{ 'msg-sent': message.status === 'sent' } " v-for="message in contacts[activeChat].messages" >
+                <div class="message" :class="{ 'msg-sent': message.status === 'sent', 'show-context':showContext === index} " v-for="(message, index) in contacts[activeChat].messages" :key="`message-${index}`">
                     <p>{{ message.message }}</p>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down" @click="openContextMenu(index)"></i>
                     <span class="time">{{ dateToTime(getDateFromString(message.date)) }}</span>
                     <div class="context-menu">
                         <div>Message Info</div>    
-                        <div>Delete Message</div>    
+                        <div @click="deleteMessage(index)">Delete Message</div>    
                     </div>
                 </div>
             </div>
