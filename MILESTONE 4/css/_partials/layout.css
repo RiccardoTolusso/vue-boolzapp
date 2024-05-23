@@ -1,0 +1,214 @@
+body{
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(
+        var(--background-color-dark-green) 0%,
+        var(--background-color-dark-green) 20%,
+        var(--background-color-light-green) 20%,
+        var(--background-color-light-green) 100%
+    );
+}
+
+/*+ APP */
+.app{
+    width: 100%;
+    display: flex;
+    background-color: white;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.col > div{
+    width: 100%;
+}
+
+/*+ COL */
+.col .top-section{
+    flex-shrink: 0;
+    background-color: var(--color-light);
+}
+.col .user{
+    padding: .4375rem;
+    display: flex;
+    align-items: center;
+}
+.col .user img{
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    object-fit: cover;
+}
+.col .user .text{
+    padding-left: 1.25rem;
+}
+.col .user .text .description{
+    font-size: var(--font-xs);
+    color: var(--color-gray);
+}
+.menu .description{
+    /* triple dots */
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    max-width: 11rem;
+    display: inline-block; 
+    height: 1.2em; 
+    white-space: nowrap;
+    /* /triple dots */
+}
+.col .buttons i{
+    color: var(--color-gray);
+    padding-right: 0.9rem;
+}
+
+/*+ CHAT */
+.app .col.chat{
+    width: 100%;
+}
+
+/*> top-section */
+
+/*> messages-section */
+.chat .messages-section{
+    background-image: url(../../img/mine.jpg);
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+  /*>> message  */
+.messages-section .message{
+    max-width: 50%;
+    margin: 0.5rem 10%;
+    background-color: white;
+    padding: 1rem 2rem 1.5rem 1rem;
+    border-radius: .625rem;
+    position: relative;
+    align-self: flex-start;
+}
+
+.messages-section .message p{
+    padding-right: 1rem;
+}
+
+.messages-section .message:first-child{
+    margin-top: 3rem;
+}
+.messages-section .message i{
+    position: absolute;
+    color: var(--color-gray);
+    top: 1.2rem;
+    right: 12px;
+}
+.messages-section .message .time{
+    position: absolute;
+    font-size: var(--font-xs);
+    color: var(--color-gray);
+    bottom: .250rem;
+    right: .250rem;
+}
+.messages-section .message.msg-sent{
+    background-color: var(--color-green);
+    align-self: flex-end;
+}
+
+/*> input-section */
+.chat .input-section{
+    flex-shrink: 0;
+    background-color: var(--color-light);
+    display: flex;
+    align-items: flex-start; /*TODO: CHIEDERE AL PROF COME MAI NON ALIGN-ITEMS CENTER*/
+}
+.chat .input-section input{
+    width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+}
+.chat .input-section i{
+    color: var(--color-dark-gray);
+}
+
+/*+ MENU */
+.menu{
+    border-right: 1px solid var(--color-gray);
+}
+/*> top-section */
+/*> notify-section */
+.menu .notify-section{
+    background-color: var(--color-azure);
+    flex-shrink: 0;
+    padding: 0.5rem;
+    padding-right: 0;
+}
+.menu .notify-section i{
+    color: var(--color-azure);
+    background-color: white;
+    padding: 1rem .8125rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+.menu .notify-section span{
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+}
+.menu .notify-section span h2{
+    font-size: var(--font-default);
+}
+.menu .notify-section span p{
+    font-size: var(--font-xs);
+    text-decoration: underline;
+}
+
+/*> search-section */
+.menu .search-section{
+    background-color: var(--color-light);
+    flex-shrink: 0;
+    position: relative;
+}
+.menu .search-section i{
+    color: var(--color-gray);
+    font-size: var(--font-default);
+    position: absolute;
+    left: 2rem;
+    z-index: 1;
+}
+.menu .search-section input{
+    color: var(--color-gray);
+    border: none;
+    font-size: var(--font-default);
+    width: 90%;
+    margin: 0.5rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+}
+
+/*> chats-section */
+.menu .chats-section{
+    height: 100%;
+    overflow-y: auto;
+}
+.menu .chats-section .closed-chat{
+    position: relative;
+}
+.menu .chats-section .closed-chat:hover{
+    background-color: var(--color-light);
+}
+.menu .chats-section .closed-chat .last-time{
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    font-size: var(--font-xs);
+    color: var(--color-gray);
+}
+
