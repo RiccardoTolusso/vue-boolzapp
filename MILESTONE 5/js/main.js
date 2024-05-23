@@ -80,4 +80,5 @@ createApp({
     onBeforeMount(){
         console.log("ciaooo")
     }
+
 }).mount(".app")
