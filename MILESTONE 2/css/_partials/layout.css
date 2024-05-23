@@ -48,6 +48,8 @@ body{
 .col .user .text .description{
     font-size: var(--font-xs);
     color: var(--color-gray);
+}
+.menu .description{
     /* triple dots */
     text-overflow: ellipsis;
     overflow: hidden; 

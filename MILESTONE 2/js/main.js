@@ -12,7 +12,7 @@ createApp({
     data(){
         return {
             contacts,
-            currentChat: 0,
+            activeChat: 0,
         }
     },
     methods:{
@@ -27,5 +27,8 @@ createApp({
         dateToTime(date){
             return date.toLocaleString(DateTime.TIME_24_SIMPLE)
         },
+        getTimeFromLastMessage(index){
+            return this.dateToTime( this.getDateFromString( this.getLastMessage(index).date ) )
+        }
     }
 }).mount(".app")
