@@ -13,7 +13,8 @@ createApp({
         return {
             contacts,
             activeChat: 0,
-            inputTexts: []
+            inputTexts: [],
+            inputSearch: null
         }
     },
     methods:{
@@ -65,6 +66,15 @@ createApp({
                 this.addMessage(activeChat, "ok", "received")
             }, 1_000)
             console.log("qua")
+        },
+        filterSearch(){
+            if (this.inputSearch){
+                return this.contacts.filter((contact) => {
+                    return contact.name.toLowerCase().includes(this.inputSearch.toLowerCase());
+                })
+            } else {
+                return this.contacts;
+            }
         }   
     }
 }).mount(".app")
