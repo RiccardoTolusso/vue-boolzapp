@@ -1,0 +1,17 @@
+:root{
+    /* colors */
+    --color-green: #d4f9bb;
+    --color-light: #eaeaea;
+    --color-gray: #b1b1b1;
+    --color-dark-gray: #6b7376;
+    --color-azure: #8fdafc;
+    --background-color-dark-green: #009588;
+    --background-color-light-green: #dcdbd4;
+
+    /* font sizes */
+    --font-xs: .875rem;
+    --font-s: .9375rem;
+    --font-default: 1rem;
+    --font-large: 1.0625rem;
+    --font-xl: 1.25rem;
+}
