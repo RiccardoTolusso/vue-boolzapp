@@ -1,0 +1,22 @@
+:root{
+  font-family: "Lato", sans-serif;
+}
+
+.app .tablet-up{
+    display: none;
+}
+
+.app .desktop-sm-up{
+    display: block;
+}
+
+h2{
+    font-size: var(--font-large);
+}
+
+i{
+    font-size: var(--font-xl);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
