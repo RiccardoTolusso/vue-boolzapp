@@ -7,7 +7,7 @@
 }
 
 .app .desktop-sm-up{
-    display: none;
+    display: block;
 }
 
 h2{

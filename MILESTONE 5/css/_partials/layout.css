@@ -28,6 +28,8 @@ body{
 
 /*+ COL */
 .col .top-section{
+    display: flex;
+    justify-content: space-between;
     flex-shrink: 0;
     background-color: var(--color-light);
 }
@@ -36,6 +38,17 @@ body{
     display: flex;
     align-items: center;
 }
+
+.col .user i{
+    flex-shrink: 0;
+    display: block;
+    position: relative;
+    line-height: 4rem;
+    height: 4rem;
+    width: 2rem;
+    margin-left: .750rem;
+}
+
 .col .user img{
     border-radius: 50%;
     height: 4rem;
@@ -155,6 +168,7 @@ body{
 
 /*> input-section */
 .chat .input-section{
+    padding: 0px 10px;
     flex-shrink: 0;
     background-color: var(--color-light);
     display: flex;
@@ -174,6 +188,7 @@ body{
 /*+ MENU */
 .menu{
     border-right: 1px solid var(--color-gray);
+    width: 100%;
 }
 /*> top-section */
 /*> notify-section */

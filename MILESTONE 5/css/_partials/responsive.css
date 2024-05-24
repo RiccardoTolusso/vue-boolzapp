@@ -10,20 +10,21 @@
 
     .col.menu{
         flex-shrink: 0;
-    }
-
-    .col .top-section{
-        display: flex;
-        justify-content: space-between;
+        width: fit-content;
     }
 
     .chat .input-section{
         padding: 0 1rem;
     }
+    
+    .app .desktop-sm-up{
+        display: none;
+    }
 } 
 
 /* small laptop up */
 @media screen and (min-width: 768px){
+
     .app .desktop-sm-up{
         display: block;
     }

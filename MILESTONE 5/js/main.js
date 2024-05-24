@@ -15,7 +15,9 @@ createApp({
             activeChat: 0,
             inputTexts: [],
             inputSearch: null,
-            showContext: null
+            showContext: null,
+            isPhoneSize: false,
+            showOnlyMenu: false
         }
     },
     methods:{
@@ -35,6 +37,9 @@ createApp({
         changeActive(newIndex){
             this.activeChat = newIndex;
             this.showContext = null
+            if (this.isPhoneSize){
+                this.showOnlyMenu = false;
+            }
         },
         addMessage(index, message, status){
             // dato l'indice corrispondente al contatto e un messaggio aggiunge il messaggio alla lista dei messaggi
@@ -80,7 +85,7 @@ createApp({
         },
         openContextMenu(index){
             if (this.showContext === index){
-                this.showContext === null
+                this.showContext = null
             } else {
                 this.showContext = index   
             }
@@ -103,8 +108,25 @@ createApp({
 
             })
             this.showContext = null
+        },
+        switchView(){
+            console.log("ciao")
+            this.showOnlyMenu = !this.showOnlyMenu;
         }
         
+    },
+    beforeMount(){
+        var biggerThenPhoneMediaQuery = window.matchMedia("(min-width: 480px)")
+        if (!biggerThenPhoneMediaQuery.matches){
+            this.isPhoneSize = true
+        } 
+        biggerThenPhoneMediaQuery.addEventListener("change", () => {
+            if (biggerThenPhoneMediaQuery.matches){
+                this.isPhoneSize = false
+            } else {
+                this.isPhoneSize = true
+            }
+        })
     }
 
 }).mount(".app")
