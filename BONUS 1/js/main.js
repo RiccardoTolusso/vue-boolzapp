@@ -13,7 +13,6 @@ createApp({
         return {
             contacts,
             activeChat: 0,
-            inputTexts: [],
             inputSearch: null,
             showContext: null,
             isPhoneSize: false,
@@ -69,15 +68,16 @@ createApp({
             return true
         },
         sendMessage(){
-            if (this.addMessage(this.activeChat, this.inputTexts[this.activeChat], "sent")){
+            const message = this.contacts[this.activeChat].inputText
+            if (this.addMessage(this.activeChat, message, "sent")){
                 // se il messaggio dell'utente passa la validazione allora inizio a inviare la risposta
                 const activeChat = this.activeChat
                 setTimeout(()=>{
-                    this.addMessage(activeChat, "ok", "received")
+                    this.addMessage(activeChat, this.findMessage(message), "received")
                 }, 1_000)
                 this.showContext = null
             }
-            this.inputTexts[this.activeChat] = null;
+            this.contacts[this.activeChat].inputText = "";
         },
         filterSearch(){
             if (this.inputSearch){
@@ -117,7 +117,32 @@ createApp({
         switchView(){
             console.log("ciao")
             this.showOnlyMenu = !this.showOnlyMenu;
-        }
+        },
+        findMessage(message){
+            // cerca un messaggio simile e restituisce la risposta
+            // se non esiste risposta restituisce 'OK'
+            let answer = null;
+            let contContacts = 0;
+            // effettuo i controlli su null con == così evito di controllare se nell assegnare un valore del messaggio sto cercando di accedere ad un messaggio che non esiste e quindi che sia undefined
+            while (contContacts < this.contacts.length && answer == null){
+                const messages = this.contacts[contContacts].messages
+                let contMessages = 0;
+                while (contMessages < messages.length && answer == null){
+                    if (messages[contMessages].message.toLowerCase() === message.toLowerCase()){
+                        if (messages[contMessages + 1] != undefined){
+                            answer = messages[contMessages + 1].message
+                        } 
+                    }
+                    contMessages++
+                }
+                contContacts++
+            }
+            if ( answer != null){
+                return answer
+            } else {
+                return "ok"
+            }
+        }   
         
     },
     beforeMount(){
@@ -130,6 +155,15 @@ createApp({
                 this.isPhoneSize = false
             } else {
                 this.isPhoneSize = true
+            }
+        })
+
+        // modifico la mia lista di contatti per avere qualche valore in più
+        this.contacts = this.contacts.map((contact)=>{
+            return {
+                ...contact,
+                inputText: "",
+                status: ""
             }
         })
     }
