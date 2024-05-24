@@ -42,7 +42,7 @@ createApp({
             }
         },
         addMessage(index, message, status){
-            if (message === null || message.replace(/\s/g,'') === ""){
+            if (message == null || message.replace(/\s/g,'') === ""){
                 return false
             }
             // dato l'indice corrispondente al contatto e un messaggio aggiunge il messaggio alla lista dei messaggi
