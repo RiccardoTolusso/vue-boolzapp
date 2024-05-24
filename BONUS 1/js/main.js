@@ -42,6 +42,9 @@ createApp({
             }
         },
         addMessage(index, message, status){
+            if (message === null || message.replace(/\s/g,'') === ""){
+                return false
+            }
             // dato l'indice corrispondente al contatto e un messaggio aggiunge il messaggio alla lista dei messaggi
             this.contacts = this.contacts.map((contact, i) => {
                 if (i !== index){
@@ -62,17 +65,19 @@ createApp({
                     )
                     return newContact
                 }
-
             })
+            return true
         },
         sendMessage(){
-            this.addMessage(this.activeChat, this.inputTexts[this.activeChat], "sent")
+            if (this.addMessage(this.activeChat, this.inputTexts[this.activeChat], "sent")){
+                // se il messaggio dell'utente passa la validazione allora inizio a inviare la risposta
+                const activeChat = this.activeChat
+                setTimeout(()=>{
+                    this.addMessage(activeChat, "ok", "received")
+                }, 1_000)
+                this.showContext = null
+            }
             this.inputTexts[this.activeChat] = null;
-            const activeChat = this.activeChat
-            setTimeout(()=>{
-                this.addMessage(activeChat, "ok", "received")
-            }, 1_000)
-            this.showContext = null
         },
         filterSearch(){
             if (this.inputSearch){
