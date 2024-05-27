@@ -3,7 +3,6 @@ import contacts from "./data.js"
 
 var DateTime = luxon.DateTime;
 
-console.log(contacts)
 // VUE
 const { createApp } = Vue
 
@@ -13,15 +12,21 @@ createApp({
         return {
             contacts,
             activeChat: 0,
-            inputSearch: null,
+            inputSearch: "",
             showContext: null,
             isPhoneSize: false,
             showOnlyMenu: false
         }
     },
     methods:{
-        getLastMessage(index){
-            return this.contacts[index].messages.at(-1);
+        getLastMessage(index, receivedOnly = false){
+            // restituisce la data dell'utlimo messaggio
+            // se received only restituisce solo la data dell'ultimo messaggio che io ho ricevuto
+            if (receivedOnly){
+                return this.contacts[index].messages.filter((message) => message.status === "received").at(-1);
+            } else {
+                return this.contacts[index].messages.at(-1);
+            }
         },
         getDateFromString(dateString){
             const date = DateTime.fromFormat(dateString, "dd/MM/yyyy HH:mm:ss", {locale:"it"})
@@ -30,8 +35,8 @@ createApp({
         dateToTime(date){
             return date.toLocaleString(DateTime.TIME_24_SIMPLE)
         },
-        getTimeFromLastMessage(index){
-            return this.dateToTime( this.getDateFromString( this.getLastMessage(index).date ) )
+        getTimeFromLastMessage(index, receivedOnly = false){
+            return this.dateToTime( this.getDateFromString( this.getLastMessage(index, receivedOnly).date ) )
         },
         changeActive(newIndex){
             this.activeChat = newIndex;
@@ -69,24 +74,23 @@ createApp({
         },
         sendMessage(){
             const message = this.contacts[this.activeChat].inputText
+            this.contacts[this.activeChat].status = "typing"
             if (this.addMessage(this.activeChat, message, "sent")){
                 // se il messaggio dell'utente passa la validazione allora inizio a inviare la risposta
                 const activeChat = this.activeChat
                 setTimeout(()=>{
                     this.addMessage(activeChat, this.findMessage(message), "received")
+                    this.contacts[activeChat].status = "online"
+                    setTimeout(() => {
+                        this.contacts[activeChat].status = ""
+                    }, 3000)
                 }, 1_000)
                 this.showContext = null
             }
             this.contacts[this.activeChat].inputText = "";
         },
-        filterSearch(){
-            if (this.inputSearch){
-                return this.contacts.filter((contact) => {
-                    return contact.name.toLowerCase().includes(this.inputSearch.toLowerCase());
-                })
-            } else {
-                return this.contacts;
-            }
+        filterSearch(contact){
+            return contact.name.toLowerCase().includes(this.inputSearch.toLowerCase());
         },
         openContextMenu(index){
             if (this.showContext === index){
@@ -115,7 +119,6 @@ createApp({
             this.showContext = null
         },
         switchView(){
-            console.log("ciao")
             this.showOnlyMenu = !this.showOnlyMenu;
         },
         findMessage(message){
@@ -142,7 +145,22 @@ createApp({
             } else {
                 return "ok"
             }
-        }   
+        },
+        parseCurrentActiveStatus(){
+            if (this.contacts[this.activeChat].status === "typing"){
+                return "sta scrivendo..."
+            }
+            if (this.contacts[this.activeChat].status === "online"){
+                return "Online"
+            }
+            return `Ultimo accesso alle ${this.getTimeFromLastMessage(this.activeChat, true)}`
+        },
+        parseLastMessageOrStatus(index){
+            if (this.contacts[index].status === "typing"){
+                return "sta scrivendo..."
+            }
+            return this.getLastMessage(index).message
+        }     
         
     },
     beforeMount(){

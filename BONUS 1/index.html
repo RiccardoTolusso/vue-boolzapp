@@ -45,13 +45,13 @@
             </div>
             <div class="chats-section">
                 <!-- CHAT DEI CONTATTI -->
-                <div class="closed-chat" v-for="(contact, index) in filterSearch()" v-show="contact.visible" @click="changeActive(index)" :key="`contact-${index}`">
+                <div class="closed-chat" v-for="(contact, index) in this.contacts" v-show="contact.visible && filterSearch(contact)" @click="changeActive(index)" :key="`contact-${index}`">
                     <span class="last-time desktop-sm-up">{{ getTimeFromLastMessage(index) }}</span>
                     <div class="user"> 
                         <img :src="contact.avatar" alt="Avatar1">
                         <div class="text desktop-sm-up">
                             <h2 class="name">{{ contact.name }}</h2>
-                            <span class="description">{{ getLastMessage(index).message }}</span>
+                            <span class="description">{{ parseLastMessageOrStatus(index) }}</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <img :src="contacts[activeChat].avatar" alt="Avatar1">
                     <div class="text">
                         <h2 class="name">{{ contacts[activeChat].name }}</h2>
-                        <span class="description">{{`Ultimo accesso oggi alle ${getTimeFromLastMessage(activeChat)}`}}</span>
+                        <span class="description">{{parseCurrentActiveStatus()}}</span>
                     </div>
                 </div>
                 <div class="buttons tablet-up">
